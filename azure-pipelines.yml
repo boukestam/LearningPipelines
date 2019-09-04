@@ -17,6 +17,10 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
+  Region: 'West Europe'
+  ResourceGroup: 'pocahontas'
+
+
 stages:
 - stage: Build
   displayName: Build stage
@@ -47,6 +51,32 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
+
+- stage: Infrastructure
+  displayName: Infrastructure stage
+  jobs:
+  - job: Infrastructure
+    displayName: Infrastructure deploy to Azure
+    pool:
+      name: Hosted Ubuntu 1604
+    
+    steps:
+    - task: AzureCLI@1
+      displayName: Infrastructure deploy
+      inputs:
+        azureSubscription: 'Microsoft Partner Network (638d2576-7c45-4f61-8b1a-271ffb5f599d)-2078'
+        scriptLocation: 'inlineScript'
+        inlineScript: '
+          # Resource group
+          az group create  --name $(ResourceGroup)  --location $(Region)
+
+          # Web plan
+          az appservice plan create -n $(ResourceGroup)-plan -g $(ResourceGroup) -l $(Region) --sku $(SKU1)
+
+          # App service
+          az webapp create -n $(ResourceGroup) -g $(ResourceGroup) -p $(ResourceGroup)-plan
+          az webapp update -n $(ResourceGroup) -g $(ResourceGroup) --https-only true
+        '
 
 - stage: Release
   displayName: Release stage
