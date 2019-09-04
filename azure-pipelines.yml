@@ -47,3 +47,21 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
+
+- stage: Release
+  displayName: Release stage
+  jobs:
+  - job: Release
+    displayName: Release to Azure
+    pool:
+      name: Hosted Ubuntu 1604
+    
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      displayName: 'Azure App Service Deploy: pocahontas'
+      inputs:
+        azureSubscription: 'Microsoft Partner Network (638d2576-7c45-4f61-8b1a-271ffb5f599d)-2078'
+        appType: webAppLinux
+        WebAppName: pocahontas
+        RuntimeStack: 'NODE|10.14'
+        StartupCommand: 'node server.js'
