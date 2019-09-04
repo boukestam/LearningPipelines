@@ -17,9 +17,16 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
+  Plans: 
+    - Name: 'pocahontas'
+      Region: 'WestEurope'
+      SKU: 'F1'
+      Services:
+        - Name: 'Pocahontas-client'
+
+
   Region: 'WestEurope'
   ResourceGroup: 'pocahontas'
-  SKUAppService: 'F1'
 
 stages:
 - stage: Build
@@ -92,5 +99,6 @@ stages:
         azureSubscription: 'Microsoft Partner Network (638d2576-7c45-4f61-8b1a-271ffb5f599d)-2078'
         appType: webAppLinux
         WebAppName: pocahontas
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         RuntimeStack: 'NODE|10.14'
         StartupCommand: 'node server.js'
