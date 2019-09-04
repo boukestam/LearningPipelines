@@ -1,0 +1,6 @@
+Plans: 
+    - Name: 'pocahontas'
+      Region: 'WestEurope'
+      SKU: 'F1'
+      Services:
+        - Name: 'Pocahontas-client'
