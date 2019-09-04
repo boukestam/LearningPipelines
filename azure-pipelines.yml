@@ -19,7 +19,7 @@ variables:
 
   Region: 'West Europe'
   ResourceGroup: 'pocahontas'
-
+  SKUAppService: 'F1'
 
 stages:
 - stage: Build
@@ -71,7 +71,7 @@ stages:
           az group create  --name $(ResourceGroup)  --location $(Region)
 
           # Web plan
-          az appservice plan create -n $(ResourceGroup)-plan -g $(ResourceGroup) -l $(Region) --sku $(SKU1)
+          az appservice plan create -n $(ResourceGroup)-plan -g $(ResourceGroup) -l $(Region) --sku $(SKUAppService)
 
           # App service
           az webapp create -n $(ResourceGroup) -g $(ResourceGroup) -p $(ResourceGroup)-plan
