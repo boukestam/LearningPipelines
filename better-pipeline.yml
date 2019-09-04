@@ -1,6 +1,9 @@
 Plans: 
-    - Name: 'pocahontas'
-      Region: 'WestEurope'
-      SKU: 'F1'
-      Services:
-        - Name: 'Pocahontas-client'
+- Name: 'IRIS'
+  Region: 'WestEurope'
+  SKU: 'F1'
+  Services:
+  - Name: 'iris-client'
+  - Name: 'iris-rest'
+  Databases:
+  - Name: ''

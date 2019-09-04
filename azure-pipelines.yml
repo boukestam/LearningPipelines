@@ -15,7 +15,7 @@ variables:
   webAppName: 'pocahontas'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'bouke-pc'
 
   Region: 'WestEurope'
   ResourceGroup: 'pocahontas'
@@ -58,7 +58,7 @@ stages:
   - job: Infrastructure
     displayName: Infrastructure deploy to Azure
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: $(vmImageName)
     
     steps:
     - task: AzureCLI@1
@@ -83,7 +83,7 @@ stages:
   - job: Release
     displayName: Release to Azure
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: $(vmImageName)
     
     steps:
     - task: AzureRmWebAppDeployment@4
