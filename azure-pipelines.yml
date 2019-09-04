@@ -74,7 +74,7 @@ stages:
           az appservice plan create -n $(ResourceGroup)-plan -g $(ResourceGroup) -l $(Region) --sku $(SKUAppService) --is-linux
 
           # App service
-          az webapp create -n $(ResourceGroup) -g $(ResourceGroup) -p $(ResourceGroup)-plan
+          az webapp create -n $(ResourceGroup) -g $(ResourceGroup) -p $(ResourceGroup)-plan --runtime "node|10.14"
           az webapp update -n $(ResourceGroup) -g $(ResourceGroup) --https-only true
 
 - stage: Release
