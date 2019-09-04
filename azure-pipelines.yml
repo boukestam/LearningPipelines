@@ -71,7 +71,7 @@ stages:
           az group create  --name $(ResourceGroup)  --location $(Region)
 
           # Web plan
-          az appservice plan create -n $(ResourceGroup)-plan -g $(ResourceGroup) -l $(Region) --sku $(SKUAppService)
+          az appservice plan create -n $(ResourceGroup)-plan -g $(ResourceGroup) -l $(Region) --sku $(SKUAppService) --is-linux
 
           # App service
           az webapp create -n $(ResourceGroup) -g $(ResourceGroup) -p $(ResourceGroup)-plan
