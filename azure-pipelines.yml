@@ -28,7 +28,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      name: $(vmImageName)
       
     steps:
     - task: NodeTool@0
@@ -58,7 +58,7 @@ stages:
   - job: Infrastructure
     displayName: Infrastructure deploy to Azure
     pool:
-      vmImage: $(vmImageName)
+      name: $(vmImageName)
     
     steps:
     - task: AzureCLI@1
@@ -83,7 +83,7 @@ stages:
   - job: Release
     displayName: Release to Azure
     pool:
-      vmImage: $(vmImageName)
+      name: $(vmImageName)
     
     steps:
     - task: AzureRmWebAppDeployment@4
