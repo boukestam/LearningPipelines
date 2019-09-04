@@ -17,7 +17,7 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-  Region: 'West Europe'
+  Region: 'WestEurope'
   ResourceGroup: 'pocahontas'
   SKUAppService: 'F1'
 
