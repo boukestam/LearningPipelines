@@ -46,7 +46,7 @@ stages:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
         includeRootFolder: false
         archiveType: zip
-        archiveFile: $(System.DefaultWorkingDirectory)/$(Build.BuildId).zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
 
 - stage: Infrastructure
@@ -90,5 +90,5 @@ stages:
         appType: webAppLinux
         WebAppName: pocahontas
         RuntimeStack: 'NODE|10.14'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         StartupCommand: 'node server.js'
