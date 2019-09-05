@@ -49,6 +49,9 @@ stages:
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
 
+    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      artifact: BuildArtifact
+
 - stage: Infrastructure
   displayName: Infrastructure stage
   jobs:
@@ -83,6 +86,9 @@ stages:
       name: $(vmImageName)
     
     steps:
+    - download: current
+      artifact: BuildArtifact
+
     - task: AzureRmWebAppDeployment@4
       displayName: 'Azure App Service Deploy: pocahontas'
       inputs:
@@ -90,5 +96,5 @@ stages:
         appType: webAppLinux
         WebAppName: pocahontas
         RuntimeStack: 'NODE|10.14'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        packageForLinux: '$(Pipeline.Workspace)/BuildArtifact'
         StartupCommand: 'node server.js'
