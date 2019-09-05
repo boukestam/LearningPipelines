@@ -96,5 +96,5 @@ stages:
         appType: webAppLinux
         WebAppName: pocahontas
         RuntimeStack: 'NODE|10.14'
-        packageForLinux: '$(Pipeline.Workspace)/BuildArtifact'
+        packageForLinux: '$(Pipeline.Workspace)/BuildArtifact/$(Build.BuildId).zip'
         StartupCommand: 'node server.js'
